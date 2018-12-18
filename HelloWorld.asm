@@ -20,7 +20,7 @@ _start
   mov edx, 13                 #string length
   int 0x80                    #interrupt to invoke the syscalls
 
-  ;To exit the program
+  #To exit the program
 
   mov eax, 1
   mov ebx, 0
