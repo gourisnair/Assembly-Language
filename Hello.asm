@@ -1,16 +1,17 @@
-section	.text
-   global _start     ;must be declared for linker (ld)
+section .data
+msg: db 'Hello, World!', 0xa
+msglen: equ $ - msg
 
-_start:	            ;tells linker entry point
-   mov	edx,len     ;message length
-   mov	ecx,msg     ;message to write
-   mov	ebx,1       ;file descriptor (stdout)
-   mov	eax,4       ;system call number (sys_write)
-   int	0x80        ;call kernel
+section .text
+global _start
+_start:
 
-   mov	eax,1       ;system call number (sys_exit)
-   int	0x80        ;call kernel
+mov eax, 4
+mov ebx, 1
+mov ecx, msg
+mov edx, msglen
+int 0x80
 
-section	.data
-msg db 'Hello, world!', 0xa  ;string to be printed
-len equ $ - msg     ;length of the string
+mov eax, 1
+mov ebx, 0
+int 0x80
